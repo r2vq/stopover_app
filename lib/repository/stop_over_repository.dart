@@ -14,19 +14,26 @@ class StopOverRepository {
   }
 
   Future<List<Poi>> fetchPois(String categoryId) async {
+    String url;
+
+    switch (categoryId) {
+      case "1":
+        url = "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg";
+        break;
+      case "2":
+        url = "http://fluttercrashcourse.com/assets/images/arashiyama@3x.jpg";
+        break;
+      case "3":
+      default:
+        url =
+            "http://fluttercrashcourse.com/assets/images/kiyomizu-dera@3x.png";
+        break;
+    }
+
     return [
-      Poi(
-          "Tim Hortons",
-          "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg",
-          "Something about Tim Hortons"),
-      Poi(
-          "KFC",
-          "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg",
-          "Something about KFC"),
-      Poi(
-          "Wendy's",
-          "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg",
-          "Something about Wendy's"),
+      Poi("Tim Hortons", url, "Something about Tim Hortons"),
+      Poi("KFC", url, "Something about KFC"),
+      Poi("Wendy's", url, "Something about Wendy's"),
     ];
   }
 }
