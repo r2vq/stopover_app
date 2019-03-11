@@ -18,4 +18,4 @@ class CategoryBloc {
   }
 }
 
-final bloc = CategoryBloc();
+final categoryBloc = CategoryBloc();

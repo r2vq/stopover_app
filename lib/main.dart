@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stopover_app/bloc/category_bloc.dart';
-import 'package:stopover_app/route/homepage_route.dart';
+import 'package:stopover_app/route/homepage.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    bloc.fetchAllCategories();
-    return HomepageRoute();
+    categoryBloc.fetchAllCategories();
+    return Homepage();
   }
 }

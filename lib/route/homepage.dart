@@ -3,14 +3,14 @@ import 'package:stopover_app/bloc/category_bloc.dart';
 import 'package:stopover_app/model/category.dart';
 import 'package:stopover_app/widget/category_list.dart';
 
-class HomepageRoute extends MaterialApp {
-  HomepageRoute()
+class Homepage extends MaterialApp {
+  Homepage()
       : super(
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
           home: StreamBuilder<List<Category>>(
-              stream: bloc.allCategories,
+              stream: categoryBloc.allCategories,
               builder: (context, snapshot) {
                 return Scaffold(
                   appBar: AppBar(
