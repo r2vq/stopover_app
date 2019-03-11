@@ -7,8 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stopover_app/bloc/category_bloc.dart';
-import 'package:stopover_app/model/category.dart';
-import 'package:stopover_app/widget/category_list.dart';
+import 'package:stopover_app/route/homepage_route.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,23 +16,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bloc.fetchAllCategories();
-    return MaterialApp(
-      title: 'Flutter Code Sample for material.Scaffold',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: StreamBuilder<List<Category>>(
-          stream: bloc.allCategories,
-          builder: (context, snapshot) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text("Hello world"),
-              ),
-              body: Center(
-                child: snapshot.hasData ? CategoryList(snapshot.data) : Text("no data"),
-              ),
-            );
-          }),
-    );
+    return HomepageRoute();
   }
 }

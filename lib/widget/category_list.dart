@@ -21,7 +21,18 @@ class CategoryList extends StatelessWidget {
         child: Stack(
       children: <Widget>[
         Image.network(category.imageUrl),
-        Text(category.name),
+        Row(
+          children: <Widget>[
+            Text(
+              category.name,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 40.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ],
     ));
   }
