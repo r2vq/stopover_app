@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:stopover_app/bloc/category_bloc.dart';
 import 'package:stopover_app/model/category.dart';
+import 'package:stopover_app/widget/category_list.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
                 title: Text("Hello world"),
               ),
               body: Center(
-                child: snapshot.hasData ? Text(snapshot.data[0].name) : Text("no data"),
+                child: snapshot.hasData ? CategoryList(snapshot.data) : Text("no data"),
               ),
             );
           }),

@@ -4,9 +4,11 @@ class StopOverRepository {
   Future<List<Category>> fetchCategories() async {
     return [
       Category("1", "Keane",
-          "https://avatars3.githubusercontent.com/u/3311081?s=400&v=4"),
+          "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg"),
       Category("2", "Denesh",
-          "https://avatars1.githubusercontent.com/u/5783814?s=460&v=4")
+          "http://fluttercrashcourse.com/assets/images/arashiyama@3x.jpg"),
+      Category("3", "Liz",
+          "http://fluttercrashcourse.com/assets/images/kiyomizu-dera@3x.png"),
     ];
   }
 }
