@@ -1,60 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:stopover_app/model/poi.dart';
 
-class PoiDetailPage extends MaterialApp {
-  PoiDetailPage(Poi poi)
-      : super(
-          theme: ThemeData(
-            primarySwatch: Colors.red,
-          ),
-          home: Scaffold(
-            appBar: AppBar(
-              title: Text("Location Detail Page"),
-            ),
-            body: SingleChildScrollView(
+class PoiDetailPage extends StatefulWidget {
+  final Poi _poi;
+
+  PoiDetailPage(this._poi) : super();
+
+  @override
+  State<StatefulWidget> createState() {
+    return PoiDetailPageState(_poi);
+  }
+}
+
+class PoiDetailPageState extends State<PoiDetailPage> {
+  final Poi _poi;
+
+  bool isFavourite = false;
+
+  PoiDetailPageState(this._poi);
+
+  void onFavouriteClicked() {
+    setState(() {
+      isFavourite = !isFavourite;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Location Detail Page"),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Image.network(_poi.imageUrl),
+            Container(
               child: Column(
                 children: <Widget>[
-                  Image.network(poi.imageUrl),
-                  Container(
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              poi.name,
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 28.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.star_border),
-                            ),
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        _poi.name,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Text(poi.description),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 10.0),
-                          child: Text(
-                            "Map",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                      ),
+                      IconButton(
+                        onPressed: onFavouriteClicked,
+                        icon: Icon(
+                          isFavourite ? Icons.star : Icons.star_border,
+                          color: Colors.red,
                         ),
-                        Image.network(poi.mapUrl),
-                      ],
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                    ),
-                    padding: EdgeInsets.all(16.0),
+                      ),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),
+                  Text(_poi.description),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 10.0),
+                    child: Text(
+                      "Map",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Image.network(_poi.mapUrl),
                 ],
+                crossAxisAlignment: CrossAxisAlignment.stretch,
               ),
+              padding: EdgeInsets.all(16.0),
             ),
-          ),
-        );
+          ],
+        ),
+      ),
+    );
+  }
 }
