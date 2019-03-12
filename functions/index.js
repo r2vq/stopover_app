@@ -1,41 +1,79 @@
 const functions = require('firebase-functions');
 const Firestore = require('@google-cloud/firestore');
 const PROJECTID = 'stopover-app-api';
-const COLLECTION_NAME = 'categories';
+const COLLECTION_CATEGORIES_NAME = 'categories';
+const COLLECTION_POIS_NAME = 'pois';
 
 const firestore = new Firestore({
-  projectId: PROJECTID,
-  timestampsInSnapshots: true,
+    projectId: PROJECTID,
+    timestampsInSnapshots: true,
 });
 
-exports.categories = functions.https.onRequest( (request, response) => {
-    // read/retrieve an existing document by id
-  
-      const id = "DXIQXmuFxAyiW1cYUfH3";
-      if (!(id && id.length)) {
-        return response.status(404).send({ error: 'Empty Id' });
-      }
-      return firestore.collection(COLLECTION_NAME)
-        .doc(id)
+exports.categories = functions.https.onRequest((request, response) => {
+    return firestore.collection(COLLECTION_CATEGORIES_NAME)
         .get()
-        .then(doc => {
-          if (!(doc && doc.exists)) {
-            return response.status(404).send({ error: 'Unable to find the document' });
-          }
-          var res = [];
-          const data = doc.data();
-          res.push(data);
-          return response.status(200).send(res);
+        .then(docs => {
+            var res = [];
+            docs.forEach(doc => {
+                const data = doc.data();
+                res.push(data);
+            });
+
+            return response.status(200).send(res);
         }).catch(err => {
-          console.error(err);
-          return response.status(404).send({ error: 'Unable to retrieve the document' });
+            console.error(err);
+            return response.status(404).send({
+                error: 'Unable to retrieve the document'
+            });
         });
-      });
+});
 
+exports.pois = functions.https.onRequest((request, response) => {
+    return firestore.collection(COLLECTION_POIS_NAME)
+        .get()
+        .then(docs => {
+            var res = [];
+            docs.forEach(doc => {
+                const data = doc.data();
+                res.push(data);
+            });
+            return response.status(200).send(res);
+        }).catch(err => {
+            console.error(err);
+            return response.status(404).send({
+                error: 'Unable to retrieve the document'
+            });
+        });
+});
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
+exports.poisByCategoryId = functions.https.onRequest((request, response) => {
+
+    const categoryId = request.query.categoryId;
+    if (!(categoryId && categoryId.length)) {
+        return response.status(404).send({
+            error: 'Empty category Id'
+        });
+    }
+    return firestore.collection(COLLECTION_POIS_NAME)
+        .get()
+        .then(docs => {
+            var res = [];
+            docs.forEach(doc => {
+                            if (categoryId === doc.get("category_id")) {
+                                const data = doc.data();
+                                res.push(data);
+                            }
+                        });
+
+            return response.status(200).send(res);
+        }).catch(err => {
+            console.error(err);
+            return response.status(404).send({
+                error: 'Unable to retrieve the document'
+            });
+        });
+});
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
+    response.send("Hello from Firebase!");
 });
