@@ -9,14 +9,29 @@ class PoiDetailPage extends MaterialApp {
           ),
           home: Scaffold(
             appBar: AppBar(
-              title: Text(poi.name),
+              title: Text("Location Detail Page"),
             ),
-            body: Container(
-              child: Column(
-                children: <Widget>[
-                  Text("Hello world!"),
-                ],
-              ),
+            body: Column(
+              children: <Widget>[
+                Image.network(poi.imageUrl),
+                Container(
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        poi.name,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(poi.description),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                  ),
+                  padding: EdgeInsets.all(16.0),
+                ),
+              ],
             ),
           ),
         );
