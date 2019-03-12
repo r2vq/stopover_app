@@ -11,27 +11,49 @@ class PoiDetailPage extends MaterialApp {
             appBar: AppBar(
               title: Text("Location Detail Page"),
             ),
-            body: Column(
-              children: <Widget>[
-                Image.network(poi.imageUrl),
-                Container(
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        poi.name,
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 28.0,
-                          fontWeight: FontWeight.bold,
+            body: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Image.network(poi.imageUrl),
+                  Container(
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              poi.name,
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 28.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.star_border),
+                            ),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         ),
-                      ),
-                      Text(poi.description),
-                    ],
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                        Text(poi.description),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 10.0),
+                          child: Text(
+                            "Map",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Image.network(poi.mapUrl),
+                      ],
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                    ),
+                    padding: EdgeInsets.all(16.0),
                   ),
-                  padding: EdgeInsets.all(16.0),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
