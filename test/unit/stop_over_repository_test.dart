@@ -55,14 +55,22 @@ Future<List<Category>> _makeFakeCategories() async {
 Future<List<Poi>> _makeFakePois() async {
   return [
     Poi(
-        "Tim Hortons",
-        "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg",
-        "Something about Tim Hortons"),
-    Poi("KFC", "http://fluttercrashcourse.com/assets/images/arashiyama@3x.jpg",
-        "Something about KFC"),
+      "Tim Hortons",
+      "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg",
+      "Something about Tim Hortons",
+      "http://geekhmer.github.io/images/google_map_draggable_maker.png",
+    ),
     Poi(
-        "Wendy's",
-        "http://fluttercrashcourse.com/assets/images/kiyomizu-dera@3x.png",
-        "Something about Wendy's"),
+      "KFC",
+      "http://fluttercrashcourse.com/assets/images/arashiyama@3x.jpg",
+      "Something about KFC",
+      "http://geekhmer.github.io/images/google_map_draggable_maker.png",
+    ),
+    Poi(
+      "Wendy's",
+      "http://fluttercrashcourse.com/assets/images/kiyomizu-dera@3x.png",
+      "Something about Wendy's",
+      "http://geekhmer.github.io/images/google_map_draggable_maker.png",
+    ),
   ];
 }

@@ -7,18 +7,18 @@ class Homepage extends MaterialApp {
   Homepage()
       : super(
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.red
           ),
           home: StreamBuilder<List<Category>>(
               stream: categoryBloc.allCategories,
-              builder: (context, snapshot) {
+              builder: (context, category) {
                 return Scaffold(
                   appBar: AppBar(
                     title: Text("Category Screen"),
                   ),
                   body: Center(
-                    child: snapshot.hasData
-                        ? CategoryList(snapshot.data)
+                    child: category.hasData
+                        ? CategoryList(category.data)
                         : Text("no data"),
                   ),
                 );

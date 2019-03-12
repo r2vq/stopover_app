@@ -42,8 +42,11 @@ class CategoryList extends StatelessWidget {
   }
 
   openCategoryDetailPage(BuildContext context, Category category) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return CategoryDetailPage(category);
-    }));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CategoryDetailPage(category),
+      ),
+    );
   }
 }
