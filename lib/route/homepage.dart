@@ -7,7 +7,7 @@ class Homepage extends MaterialApp {
   Homepage()
       : super(
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.red
           ),
           home: StreamBuilder<List<Category>>(
               stream: categoryBloc.allCategories,

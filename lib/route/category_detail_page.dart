@@ -8,7 +8,7 @@ class CategoryDetailPage extends MaterialApp {
   CategoryDetailPage(Category category)
       : super(
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.red,
           ),
           home: StreamBuilder<List<Poi>>(
               stream: poiBloc.allPois,
