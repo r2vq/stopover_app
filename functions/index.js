@@ -28,10 +28,6 @@ exports.categories = functions.https.onRequest((request, response) => {
         });
 });
 
-exports.helloWorld = functions.https.onRequest((request, response) => {
-    response.send("Hello from Firebase!");
-});
-
 exports.pois = functions.https.onRequest((request, response) => {
     return firestore.collection(COLLECTION_POIS_NAME)
         .get()
@@ -50,26 +46,25 @@ exports.pois = functions.https.onRequest((request, response) => {
         });
 });
 
-exports.poisById = functions.https.onRequest((request, response) => {
+exports.poisByCategoryId = functions.https.onRequest((request, response) => {
 
-    const id = "QZdanoOQ2cSCZZvixeGU";
-    if (!(id && id.length)) {
+    const categoryId = request.query.categoryId;
+    if (!(categoryId && categoryId.length)) {
         return response.status(404).send({
-            error: 'Empty Id'
+            error: 'Empty category Id'
         });
     }
     return firestore.collection(COLLECTION_POIS_NAME)
-        .doc(id)
         .get()
-        .then(doc => {
-            if (!(doc && doc.exists)) {
-                return response.status(404).send({
-                    error: 'Unable to find the document'
-                });
-            }
+        .then(docs => {
             var res = [];
-            const data = doc.data();
-            res.push(data);
+            docs.forEach(doc => {
+                            if (categoryId === doc.get("category_id")) {
+                                const data = doc.data();
+                                res.push(data);
+                            }
+                        });
+
             return response.status(200).send(res);
         }).catch(err => {
             console.error(err);
@@ -77,4 +72,8 @@ exports.poisById = functions.https.onRequest((request, response) => {
                 error: 'Unable to retrieve the document'
             });
         });
+});
+
+exports.helloWorld = functions.https.onRequest((request, response) => {
+    response.send("Hello from Firebase!");
 });
