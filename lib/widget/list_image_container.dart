@@ -5,7 +5,7 @@ class ListImageContainer extends Container {
       : super(
           child: Image.network(
             imageUrl,
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.cover,
           ),
           constraints: BoxConstraints.expand(
             height: 200.0,
