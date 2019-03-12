@@ -19,21 +19,23 @@ class CategoryList extends StatelessWidget {
   }
 
   Widget _createCard(BuildContext context, Category category) {
-    return GestureDetector(
-      onTap: () => openCategoryDetailPage(context, category),
-      child: Card(
-        child: Stack(
-          children: <Widget>[
-            ListImageContainer(category.imageUrl),
-            Text(
-              category.name,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 40.0,
-                fontWeight: FontWeight.bold,
+    return Semantics(
+      child: GestureDetector(
+        onTap: () => openCategoryDetailPage(context, category),
+        child: Card(
+          child: Stack(
+            children: <Widget>[
+              ListImageContainer(category.imageUrl),
+              Text(
+                category.name,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 40.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

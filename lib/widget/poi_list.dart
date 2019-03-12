@@ -18,19 +18,21 @@ class PoiList extends StatelessWidget {
   }
 
   Widget _createCard(Poi poi) {
-    return Card(
-      child: Stack(
-        children: <Widget>[
-          ListImageContainer(poi.imageUrl),
-          Text(
-            poi.name,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
+    return Semantics(
+      child: Card(
+        child: Stack(
+          children: <Widget>[
+            ListImageContainer(poi.imageUrl),
+            Text(
+              poi.name,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 40.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
