@@ -3,6 +3,7 @@ const Firestore = require('@google-cloud/firestore');
 const PROJECTID = 'stopover-app-api';
 const COLLECTION_CATEGORIES_NAME = 'categories';
 const COLLECTION_POIS_NAME = 'pois';
+const COLLECTION_FLIGHT_NAME = 'flight';
 
 const firestore = new Firestore({
     projectId: PROJECTID,
@@ -66,6 +67,24 @@ exports.poisByCategoryId = functions.https.onRequest((request, response) => {
                         });
 
             return response.status(200).send(res);
+        }).catch(err => {
+            console.error(err);
+            return response.status(404).send({
+                error: 'Unable to retrieve the document'
+            });
+        });
+});
+
+exports.flight = functions.https.onRequest((request, response) => {
+    return firestore.collection(COLLECTION_FLIGHT_NAME)
+        .get()
+        .then(docs => {
+            var data;
+            docs.forEach(doc => {
+                data = doc.data();
+            });
+
+            return response.status(200).send(data);
         }).catch(err => {
             console.error(err);
             return response.status(404).send({
