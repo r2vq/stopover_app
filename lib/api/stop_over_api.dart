@@ -9,6 +9,8 @@ abstract class StopOverApi {
   Future<List<Category>> getCategories();
 
   Future<List<Poi>> getPois(String categoryId);
+
+  Future<Flight> getFlightInfo();
 }
 
 class StopOverApiImpl implements StopOverApi {

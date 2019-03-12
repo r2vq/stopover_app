@@ -1,6 +1,7 @@
 import 'package:stopover_app/api/stop_over_api.dart';
 import 'package:stopover_app/model/category.dart';
 import 'package:stopover_app/model/poi.dart';
+import 'package:stopover_app/model/flight.dart';
 
 class StopOverRepository {
 
@@ -14,5 +15,9 @@ class StopOverRepository {
 
   Future<List<Poi>> fetchPois(String categoryId) async {
     return _api.getPois(categoryId);
+  }
+
+  Future<Flight> fetchFlightInfo() async {
+    return _api.getFlightInfo();
   }
 }
