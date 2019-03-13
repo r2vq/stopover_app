@@ -59,18 +59,21 @@ Future<List<Poi>> _makeFakePois() async {
       "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg",
       "Something about Tim Hortons",
       "http://geekhmer.github.io/images/google_map_draggable_maker.png",
+      "1",
     ),
     Poi(
       "KFC",
       "http://fluttercrashcourse.com/assets/images/arashiyama@3x.jpg",
       "Something about KFC",
       "http://geekhmer.github.io/images/google_map_draggable_maker.png",
+      "2",
     ),
     Poi(
       "Wendy's",
       "http://fluttercrashcourse.com/assets/images/kiyomizu-dera@3x.png",
       "Something about Wendy's",
       "http://geekhmer.github.io/images/google_map_draggable_maker.png",
+      "3",
     ),
   ];
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stopover_app/model/poi.dart';
 
 class PoiDetailPage extends StatefulWidget {
@@ -14,15 +15,45 @@ class PoiDetailPage extends StatefulWidget {
 
 class PoiDetailPageState extends State<PoiDetailPage> {
   final Poi _poi;
+  static const String SHARED_PREFERENCE_KEY_FAVOURITE_POIS =
+      "shared_preference_key_favourite_pois";
 
   bool isFavourite = false;
 
-  PoiDetailPageState(this._poi);
+  PoiDetailPageState(this._poi) {
+    initFavouriteButton(_poi.id);
+  }
 
   void onFavouriteClicked() {
     setState(() {
       isFavourite = !isFavourite;
     });
+    savePoiFavouriteState(_poi.id, isFavourite);
+  }
+
+  initFavouriteButton(String poiId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> favouritePois =
+        prefs.getStringList(SHARED_PREFERENCE_KEY_FAVOURITE_POIS);
+
+    setState(() {
+      isFavourite = favouritePois.contains(poiId);
+    });
+  }
+
+  savePoiFavouriteState(String poiId, bool isFavourite) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> favouritePois =
+        prefs.getStringList(SHARED_PREFERENCE_KEY_FAVOURITE_POIS);
+    if (favouritePois == null) {
+      favouritePois = List<String>();
+    }
+    favouritePois.remove(poiId);
+    if (isFavourite) {
+      favouritePois.add(poiId);
+    }
+    await prefs.setStringList(
+        SHARED_PREFERENCE_KEY_FAVOURITE_POIS, favouritePois);
   }
 
   @override
