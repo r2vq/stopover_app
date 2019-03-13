@@ -6,6 +6,7 @@ import 'package:stopover_app/widget/category_list.dart';
 class CategoryListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    categoryBloc.fetchAllCategories();
     return StreamBuilder<List<Category>>(
         stream: categoryBloc.allCategories,
         builder: (context, category) {
