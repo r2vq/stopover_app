@@ -1,114 +1,90 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stopover_app/bloc/favourite_bloc.dart';
 import 'package:stopover_app/model/poi.dart';
 
-class PoiDetailPage extends StatefulWidget {
+class PoiDetailPage extends StatelessWidget {
   final Poi _poi;
 
-  PoiDetailPage(this._poi) : super();
-
-  @override
-  State<StatefulWidget> createState() {
-    return PoiDetailPageState(_poi);
-  }
-}
-
-class PoiDetailPageState extends State<PoiDetailPage> {
-  final Poi _poi;
-  static const String SHARED_PREFERENCE_KEY_FAVOURITE_POIS =
-      "shared_preference_key_favourite_pois";
-
-  bool isFavourite = false;
-
-  PoiDetailPageState(this._poi) {
-    initFavouriteButton(_poi.id);
-  }
-
-  void onFavouriteClicked() {
-    setState(() {
-      isFavourite = !isFavourite;
-    });
-    savePoiFavouriteState(_poi.id, isFavourite);
-  }
-
-  initFavouriteButton(String poiId) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> favouritePois =
-        prefs.getStringList(SHARED_PREFERENCE_KEY_FAVOURITE_POIS);
-
-    setState(() {
-      isFavourite = favouritePois.contains(poiId);
-    });
-  }
-
-  savePoiFavouriteState(String poiId, bool isFavourite) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> favouritePois =
-        prefs.getStringList(SHARED_PREFERENCE_KEY_FAVOURITE_POIS);
-    if (favouritePois == null) {
-      favouritePois = List<String>();
-    }
-    favouritePois.remove(poiId);
-    if (isFavourite) {
-      favouritePois.add(poiId);
-    }
-    await prefs.setStringList(
-        SHARED_PREFERENCE_KEY_FAVOURITE_POIS, favouritePois);
+  PoiDetailPage(this._poi) : super() {
+    favouriteBloc.fetchFavourites();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Location Detail Page"),
-      ),
-      body: SingleChildScrollView(
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text("Location Detail Page"),
+        ),
+        body: StreamBuilder<List<String>>(
+          stream: favouriteBloc.favourites,
+          builder: (context, favourites) => SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    _buildHead(),
+                    _buildBody(favourites)
+                  ],
+                ),
+              ),
+        ),
+      );
+
+  Image _buildHead() => Image.network(_poi.imageUrl);
+
+  Padding _buildBody(AsyncSnapshot<List<String>> favourites) => Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            Image.network(_poi.imageUrl),
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        _poi.name,
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 28.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: onFavouriteClicked,
-                        icon: Icon(
-                          isFavourite ? Icons.star : Icons.star_border,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  ),
-                  Text(_poi.description),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 10.0),
-                    child: Text(
-                      "Map",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Image.network(_poi.mapUrl),
-                ],
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-              ),
-              padding: EdgeInsets.all(16.0),
-            ),
+            _buildTitle(favourites),
+            _buildDescription(),
+            _buildMap(),
           ],
+          crossAxisAlignment: CrossAxisAlignment.stretch,
         ),
-      ),
-    );
-  }
+      );
+
+  Text _buildDescription() => Text(_poi.description);
+
+  Row _buildTitle(AsyncSnapshot<List<String>> favourites) => Row(
+        children: <Widget>[
+          Text(
+            _poi.name,
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 28.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              favouriteBloc.putFavourite(
+                  _poi.id, !favourites.data.contains(_poi.id));
+              favouriteBloc.fetchFavourites();
+            },
+            icon: Icon(
+              favourites.hasData
+                  ? favourites.data.contains(_poi.id)
+                      ? Icons.star
+                      : Icons.star_border
+                  : Icons.close,
+              color: Colors.red,
+            ),
+          ),
+        ],
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      );
+
+  Column _buildMap() => Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 10.0),
+            child: Text(
+              "Map",
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Image.network(_poi.mapUrl),
+        ],
+      );
 }
