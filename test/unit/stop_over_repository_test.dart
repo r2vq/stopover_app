@@ -60,6 +60,9 @@ Future<List<Poi>> _makeFakePois() async {
       "Something about Tim Hortons",
       "http://geekhmer.github.io/images/google_map_draggable_maker.png",
       "1",
+      "17:00",
+      "12:00",
+      "1",
     ),
     Poi(
       "KFC",
@@ -67,6 +70,9 @@ Future<List<Poi>> _makeFakePois() async {
       "Something about KFC",
       "http://geekhmer.github.io/images/google_map_draggable_maker.png",
       "2",
+      "18:00",
+      "13:00",
+      "1",
     ),
     Poi(
       "Wendy's",
@@ -74,6 +80,9 @@ Future<List<Poi>> _makeFakePois() async {
       "Something about Wendy's",
       "http://geekhmer.github.io/images/google_map_draggable_maker.png",
       "3",
+      "19:00",
+      "14:00",
+      "1",
     ),
   ];
 }
