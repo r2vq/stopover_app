@@ -11,14 +11,13 @@ class CategoryDetailPage extends Scaffold {
             title: Text(category.name),
           ),
           body: StreamBuilder<List<Poi>>(
-              stream: poiBloc.allPois,
-              builder: (context, snapshot) {
-                return Center(
+            stream: poiBloc.allPois,
+            builder: (context, snapshot) => Center(
                   child: snapshot.hasData
                       ? PoiList(snapshot.data)
                       : Text("no data"),
-                );
-              }),
+                ),
+          ),
         ) {
     poiBloc.fetchAllPois(category.id);
   }
