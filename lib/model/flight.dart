@@ -18,8 +18,6 @@ class Flight {
       this._departureTerminal, this._arrivalGate, this._departureGate,
       this._departureTime, this._arrivalTime, this._boardingTime);
 
-  String get flightNo => _flightNo;
-
   factory Flight.fromJson(Map<String, dynamic> json) => Flight(
     json['flight_no'] as String,
     json['flight_name'] as String,
@@ -34,6 +32,8 @@ class Flight {
     json['departure_time'] as String,
     json['boarding_time'] as String,
   );
+
+  String get flightNo => _flightNo;
 
   String get flightName => _flightName;
 
