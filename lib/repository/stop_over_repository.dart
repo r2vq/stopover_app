@@ -20,4 +20,8 @@ class StopOverRepository {
   Future<Flight> fetchFlightInfo() async {
     return _api.getFlightInfo();
   }
+
+  Future<List<Poi>> fetchPoisByIds(List<String> poiIds) async {
+    return _api.getPoisByIds(poiIds);
+  }
 }

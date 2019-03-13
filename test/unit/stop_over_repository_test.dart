@@ -11,6 +11,7 @@ void main() {
   Future<List<Category>> fakeCategories = _makeFakeCategories();
   Future<List<Poi>> fakePois = _makeFakePois();
   String fakeCategoryId = "1";
+  List<String> fakePoiIds = ["1", "2", "3"];
 
   test('test /fetchCategories', () async {
     var mockApi = MockApi();
@@ -33,6 +34,20 @@ void main() {
     when(mockApi.getPois(fakeCategoryId)).thenAnswer((_) async => fakePois);
 
     final pois = await stopOverRepository.fetchPois(fakeCategoryId);
+    expect(pois.length, 3);
+    expect(pois[0].name, "Tim Hortons");
+    expect(pois[0].imageUrl,
+        "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg");
+    expect(pois[0].description, "Something about Tim Hortons");
+  });
+
+  test('test /fetchPoisByIds', () async {
+    var mockApi = MockApi();
+    final stopOverRepository = StopOverRepository(mockApi);
+
+    when(mockApi.getPoisByIds(fakePoiIds)).thenAnswer((_) async => fakePois);
+
+    final pois = await stopOverRepository.fetchPoisByIds(fakePoiIds);
     expect(pois.length, 3);
     expect(pois[0].name, "Tim Hortons");
     expect(pois[0].imageUrl,
