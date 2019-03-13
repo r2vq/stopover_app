@@ -5,20 +5,14 @@ import 'package:stopover_app/model/flight.dart';
 class FlightPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: StreamBuilder<Flight>(
-          stream: flightBloc.flightInfo,
-          builder: (context, snapshot) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text("Flight Info"),
-              ),
-              body: snapshot.hasData
-                  ? _createFlightUi(snapshot.data)
-                  : Text("none"),
-            );
-          }),
-    );
+    flightBloc.fetchFlightInfo();
+    return StreamBuilder<Flight>(
+        stream: flightBloc.flightInfo,
+        builder: (context, snapshot) {
+          return snapshot.hasData
+              ? _createFlightUi(snapshot.data)
+              : Text("none");
+        });
   }
 
   Widget _createFlightUi(Flight flight) {
