@@ -75,6 +75,34 @@ exports.poisByCategoryId = functions.https.onRequest((request, response) => {
         });
 });
 
+exports.poisByIds = functions.https.onRequest((request, response) => {
+    var ids = request.query.ids;
+    if (!(ids && ids.length)) {
+        return response.status(404).send({
+            error: 'Empty pois Id list'
+        });
+    }
+    var poisIds = ids.split(',');
+    return firestore.collection(COLLECTION_POIS_NAME)
+        .get()
+        .then(docs => {
+            var res = [];
+            docs.forEach(doc => {
+                const data = doc.data();
+                const poisId = data.id;
+                if (poisIds.includes(poisId)) {
+                    res.push(data);
+                }
+            })
+            return response.status(200).send(res);
+        }).catch(err => {
+            console.error(err);
+            return response.status(404).send({
+                error: 'Unable to retrieve the document'
+            });
+        });
+});
+
 exports.flight = functions.https.onRequest((request, response) => {
     return firestore.collection(COLLECTION_FLIGHT_NAME)
         .get()
