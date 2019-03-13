@@ -25,3 +25,12 @@ class StopOverRepository {
     return _api.getPoisByIds(poiIds);
   }
 }
+
+StopOverRepository _repository;
+
+StopOverRepository get repository {
+  if (_repository == null) {
+    _repository = StopOverRepository(stopOverApi);
+  }
+  return _repository;
+}
