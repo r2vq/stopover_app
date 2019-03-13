@@ -107,8 +107,12 @@ exports.flight = functions.https.onRequest((request, response) => {
     return firestore.collection(COLLECTION_FLIGHT_NAME)
         .get()
         .then(docs => {
-            var res = doc[0].data();
-            return response.status(200).send(res);
+            var data;
+            docs.forEach(doc => {
+                data = doc.data();
+            });
+
+            return response.status(200).send(data);
         }).catch(err => {
             console.error(err);
             return response.status(404).send({
