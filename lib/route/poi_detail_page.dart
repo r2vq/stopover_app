@@ -23,10 +23,7 @@ class PoiDetailPage extends StatelessWidget {
           stream: poiBloc.favouriteIds,
           builder: (context, favourites) => SingleChildScrollView(
                 child: Column(
-                  children: <Widget>[
-                    _buildHead(),
-                    _buildBody(favourites)
-                  ],
+                  children: <Widget>[_buildHead(), _buildBody(favourites)],
                 ),
               ),
         ),
@@ -60,8 +57,7 @@ class PoiDetailPage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              poiBloc.putFavourite(
-                  _poi.id, !favourites.data.contains(_poi.id));
+              poiBloc.putFavourite(_poi.id, !favourites.data.contains(_poi.id));
               poiBloc.fetchFavouriteIds();
             },
             icon: Icon(
@@ -78,6 +74,7 @@ class PoiDetailPage extends StatelessWidget {
       );
 
   Column _buildMap() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 10.0),
