@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stopover_app/route/category_list_page.dart';
+import 'package:stopover_app/route/favourites_page.dart';
 import 'package:stopover_app/route/flight_page.dart';
 
 class Homepage extends StatefulWidget {
@@ -11,7 +12,7 @@ class _HomepageState extends State<Homepage> {
 
   int _selectedIndex = 1;
   final List<Widget> _children = [
-    CategoryListPage(),
+    FavouritesPage(),
     CategoryListPage(),
     FlightPage(),
   ];
