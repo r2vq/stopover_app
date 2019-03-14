@@ -25,11 +25,7 @@ class StopOverRepository {
     return _api.getFlightInfo();
   }
 
-  Future<List<Poi>> fetchPoisByIds(List<String> poiIds) async {
-    return _api.getPoisByIds(poiIds);
-  }
-
-  Future<List<String>> favouritePois() async {
+  Future<List<String>> favouriteIds() async {
     List<String> favourites =
         (await _prefs).getStringList(SHARED_PREFERENCE_KEY_FAVOURITE_POIS);
     if (favourites == null) {
@@ -38,8 +34,13 @@ class StopOverRepository {
     return favourites;
   }
 
+  Future<List<Poi>> favouritePOIs() async {
+    List<String> ids = await favouriteIds();
+    return _api.getPoisByIds(ids);
+  }
+
   void putFavouritePoi(String poiId, bool isFavourite) async {
-    List<String> favourites = await favouritePois();
+    List<String> favourites = await favouriteIds();
     if (isFavourite) {
       favourites.add(poiId);
     } else {

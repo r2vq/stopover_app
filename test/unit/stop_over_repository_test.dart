@@ -40,20 +40,6 @@ void main() {
         "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg");
     expect(pois[0].description, "Something about Tim Hortons");
   });
-
-  test('test /fetchPoisByIds', () async {
-    var mockApi = MockApi();
-    final stopOverRepository = StopOverRepository(mockApi);
-
-    when(mockApi.getPoisByIds(fakePoiIds)).thenAnswer((_) async => fakePois);
-
-    final pois = await stopOverRepository.fetchPoisByIds(fakePoiIds);
-    expect(pois.length, 3);
-    expect(pois[0].name, "Tim Hortons");
-    expect(pois[0].imageUrl,
-        "http://fluttercrashcourse.com/assets/images/fuji@3x.jpg");
-    expect(pois[0].description, "Something about Tim Hortons");
-  });
 }
 
 Future<List<Category>> _makeFakeCategories() async {

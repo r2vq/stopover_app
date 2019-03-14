@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:stopover_app/bloc/favourite_bloc.dart';
+import 'package:stopover_app/bloc/poi_bloc.dart';
 import 'package:stopover_app/model/poi.dart';
 
 class PoiDetailPage extends StatelessWidget {
   final Poi _poi;
 
   PoiDetailPage(this._poi) : super() {
-    favouriteBloc.fetchFavourites();
+    poiBloc.fetchFavourites();
   }
 
   @override
@@ -15,7 +15,7 @@ class PoiDetailPage extends StatelessWidget {
           title: Text("Location Detail Page"),
         ),
         body: StreamBuilder<List<String>>(
-          stream: favouriteBloc.favourites,
+          stream: poiBloc.favouriteIds,
           builder: (context, favourites) => SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
@@ -55,9 +55,9 @@ class PoiDetailPage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              favouriteBloc.putFavourite(
+              poiBloc.putFavourite(
                   _poi.id, !favourites.data.contains(_poi.id));
-              favouriteBloc.fetchFavourites();
+              poiBloc.fetchFavourites();
             },
             icon: Icon(
               favourites.hasData
