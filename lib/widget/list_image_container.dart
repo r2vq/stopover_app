@@ -1,19 +1,22 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
-class ListImageContainer extends Container {
-  ListImageContainer(String imageUrl)
-      : super(
-          child: Image.network(
-            imageUrl,
-            fit: BoxFit.cover,
-          ),
-          constraints: BoxConstraints.expand(
-            height: 200.0,
-          ),
-          foregroundDecoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.white, Colors.transparent],
-            ),
-          ),
-        );
+class ListImageContainer extends StatelessWidget {
+
+  final String imageUrl;
+
+  ListImageContainer(this.imageUrl);
+
+  @override
+  Widget build(BuildContext context) {
+    Image image;
+    try {
+      image = Image.network(imageUrl, fit: BoxFit.cover);
+    } catch (e) {
+      print("could not load image $imageUrl");
+    }
+    return Container(
+      constraints: BoxConstraints.expand(height: 200.0),
+      child: image,
+    );
+  }
 }

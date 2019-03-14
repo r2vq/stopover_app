@@ -6,7 +6,6 @@
 // connected to a callback that increments a counter.
 
 import 'package:flutter/material.dart';
-import 'package:stopover_app/bloc/category_bloc.dart';
 import 'package:stopover_app/route/homepage.dart';
 
 void main() => runApp(MyApp());

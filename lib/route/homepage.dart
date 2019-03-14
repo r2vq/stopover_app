@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stopover_app/route/category_list_page.dart';
 import 'package:stopover_app/route/favourites_page.dart';
 import 'package:stopover_app/route/flight_page.dart';
+import 'package:stopover_app/widget/default_app_bar.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -25,9 +26,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: _titles[_selectedIndex],
-      ),
+      appBar: DefaultAppBar(),
       body: Center(
         child: _children[_selectedIndex],
       ),
