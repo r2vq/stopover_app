@@ -3,8 +3,9 @@
 class ListImageContainer extends StatelessWidget {
 
   final String imageUrl;
+  final double height;
 
-  ListImageContainer(this.imageUrl);
+  ListImageContainer(this.imageUrl, this.height);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class ListImageContainer extends StatelessWidget {
       print("could not load image $imageUrl");
     }
     return Container(
-      constraints: BoxConstraints.expand(height: 200.0),
+      constraints: BoxConstraints.expand(height: height),
       child: image,
     );
   }

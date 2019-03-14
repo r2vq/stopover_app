@@ -23,13 +23,13 @@ class CategoryList extends StatelessWidget {
   Widget _createCard(BuildContext context, Category category) {
     return Semantics(
       child: GestureDetector(
-        onTap: () => openCategoryDetailPage(context, category),
+        onTap: () => _openCategoryDetailPage(context, category),
         child: Card(
           child: Container(
             height: 200.0,
             child: Stack(
               children: <Widget>[
-                ListImageContainer(category.imageUrl),
+                ListImageContainer(category.imageUrl, 200.0),
                 _tileFooter(category)
               ],
             ),
@@ -59,7 +59,7 @@ class CategoryList extends StatelessWidget {
     );
   }
 
-  openCategoryDetailPage(BuildContext context, Category category) {
+  _openCategoryDetailPage(BuildContext context, Category category) {
     Navigator.push(
       context,
       MaterialPageRoute(

@@ -24,14 +24,14 @@ class PoiList extends StatelessWidget {
 
   Widget _createCard(BuildContext context, Poi poi) {
     return GestureDetector(
-      onTap: () => openPoiDetailPage(context, poi),
+      onTap: () => _openPoiDetailPage(context, poi),
       child: Semantics(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(18.0),
           child: Card(
             child: Stack(
               children: <Widget>[
-                ListImageContainer(poi.imageUrl),
+                ListImageContainer(poi.imageUrl, 200.0),
                 _tileFooter(poi),
               ],
             ),
@@ -42,7 +42,7 @@ class PoiList extends StatelessWidget {
   }
 
   Widget _tileFooter(Poi poi) {
-    final info = PoiTile(poi);
+    final info = PoiTile(poi, 16.0, 12.0, Colors.white);
     final overlay = Container(
       height: 60.0,
       padding: EdgeInsets.symmetric(
@@ -57,7 +57,7 @@ class PoiList extends StatelessWidget {
     );
   }
 
-  openPoiDetailPage(BuildContext context, Poi poi) {
+  _openPoiDetailPage(BuildContext context, Poi poi) {
     Navigator.push(
       context,
       MaterialPageRoute(
