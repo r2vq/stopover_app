@@ -6,7 +6,7 @@ class PoiDetailPage extends StatelessWidget {
   final Poi _poi;
 
   PoiDetailPage(this._poi) : super() {
-    poiBloc.fetchFavourites();
+    poiBloc.fetchFavouriteIds();
   }
 
   @override
@@ -57,7 +57,7 @@ class PoiDetailPage extends StatelessWidget {
             onPressed: () {
               poiBloc.putFavourite(
                   _poi.id, !favourites.data.contains(_poi.id));
-              poiBloc.fetchFavourites();
+              poiBloc.fetchFavouriteIds();
             },
             icon: Icon(
               favourites.hasData

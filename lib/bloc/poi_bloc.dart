@@ -24,7 +24,7 @@ class PoiBloc {
     _favouritePoisFetcher.sink.add(pois);
   }
 
-  fetchFavourites() async {
+  fetchFavouriteIds() async {
     List<String> ids = await _repository.favouriteIds();
     _favouriteIdsFetcher.sink.add(ids);
   }
