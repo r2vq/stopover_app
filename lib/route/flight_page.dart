@@ -16,7 +16,7 @@ class FlightPage extends StatelessWidget {
   }
 
   Widget _createFlightUi(Flight flight) {
-    return Container(
+    return SingleChildScrollView(
       padding: EdgeInsets.all(6),
       child: Card(
         child: Container(
