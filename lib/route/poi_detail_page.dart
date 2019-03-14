@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stopover_app/bloc/poi_bloc.dart';
 import 'package:stopover_app/model/poi.dart';
+import 'package:stopover_app/widget/location_map.dart';
 
 class PoiDetailPage extends StatelessWidget {
   final Poi _poi;
@@ -84,7 +85,7 @@ class PoiDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          Image.network(_poi.mapUrl),
+          LocationMap(_poi.markerLatPosition, _poi.markerLongPosition)
         ],
       );
 }
