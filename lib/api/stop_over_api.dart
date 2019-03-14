@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:stopover_app/model/category.dart';
-import 'package:stopover_app/model/poi.dart';
 import 'package:stopover_app/model/flight.dart';
+import 'package:stopover_app/model/poi.dart';
 
 abstract class StopOverApi {
   Future<List<Category>> getCategories();
@@ -11,6 +11,8 @@ abstract class StopOverApi {
   Future<List<Poi>> getPois(String categoryId);
 
   Future<Flight> getFlightInfo();
+
+  Future<List<Poi>> getPoisByIds(List<String> poiIds);
 }
 
 class StopOverApiImpl implements StopOverApi {
@@ -30,11 +32,25 @@ class StopOverApiImpl implements StopOverApi {
 
   @override
   Future<List<Poi>> getPois(String categoryId) async {
-    final response = await http
-        .get("https://us-central1-stopover-app-api.cloudfunctions.net/poisByCategoryId?categoryId=$categoryId");
+    final response = await http.get(
+        "https://us-central1-stopover-app-api.cloudfunctions.net/poisByCategoryId?categoryId=$categoryId");
 
     if (response.statusCode != 200) {
-      throw (response.body);
+      throw response.body;
+    }
+
+    return (json.decode(response.body) as List)
+        .map((model) => Poi.fromJson(model))
+        .toList();
+  }
+
+  @override
+  Future<List<Poi>> getPoisByIds(List<String> poiIds) async {
+    final response = await http.get(
+        "https://us-central1-stopover-app-api.cloudfunctions.net/poisByIds?poiIds=${poiIds.join(",")}");
+
+    if (response.statusCode != 200) {
+      throw response.body;
     }
 
     return (json.decode(response.body) as List)
