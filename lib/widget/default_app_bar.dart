@@ -15,8 +15,5 @@ class DefaultAppBar extends AppBar {
   Color get backgroundColor => Colors.red;
 
   @override
-  bool get centerTitle => true;
-
-  @override
   double get elevation => 0.5;
 }
