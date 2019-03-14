@@ -11,12 +11,12 @@ class FlightPage extends StatelessWidget {
         builder: (context, snapshot) {
           return snapshot.hasData
               ? _createFlightUi(snapshot.data)
-              : Text("none");
+              : CircularProgressIndicator();
         });
   }
 
   Widget _createFlightUi(Flight flight) {
-    return Container(
+    return SingleChildScrollView(
       padding: EdgeInsets.all(6),
       child: Card(
         child: Container(

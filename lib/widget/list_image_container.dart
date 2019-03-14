@@ -12,7 +12,7 @@ class ListImageContainer extends Container {
           ),
           foregroundDecoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.white.withOpacity(0.7), Colors.transparent],
+              colors: [Colors.white, Colors.transparent],
             ),
           ),
         );

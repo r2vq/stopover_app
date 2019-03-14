@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stopover_app/route/category_list_page.dart';
+import 'package:stopover_app/route/favourites_page.dart';
 import 'package:stopover_app/route/flight_page.dart';
 
 class Homepage extends StatefulWidget {
@@ -8,10 +9,9 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-
   int _selectedIndex = 1;
   final List<Widget> _children = [
-    CategoryListPage(),
+    FavouritesPage(),
     CategoryListPage(),
     FlightPage(),
   ];
@@ -34,11 +34,17 @@ class _HomepageState extends State<Homepage> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.star), title: _titles[0]),
+            icon: Icon(Icons.star),
+            title: _titles[0],
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.attach_money), title: _titles[1]),
+            icon: Icon(Icons.attach_money),
+            title: _titles[1],
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.flight_takeoff), title: _titles[2]),
+            icon: Icon(Icons.flight_takeoff),
+            title: _titles[2],
+          ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -52,5 +58,4 @@ class _HomepageState extends State<Homepage> {
       _selectedIndex = index;
     });
   }
-
 }
