@@ -31,7 +31,7 @@ class PoiList extends StatelessWidget {
           child: Card(
             child: Stack(
               children: <Widget>[
-                ListImageContainer(poi.imageUrl),
+                ListImageContainer(poi.imageUrl, 200.0),
                 _tileFooter(poi),
               ],
             ),
@@ -42,7 +42,7 @@ class PoiList extends StatelessWidget {
   }
 
   Widget _tileFooter(Poi poi) {
-    final info = PoiTile(poi);
+    final info = PoiTile(poi, 16.0, 12.0, Colors.white);
     final overlay = Container(
       height: 60.0,
       padding: EdgeInsets.symmetric(

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stopover_app/model/poi.dart';
-import 'package:stopover_app/styles.dart';
 
 const PoiTileHeight = 60.0;
 
 class PoiTile extends StatelessWidget {
   final Poi poi;
+  final double primaryFontSize;
+  final double secondaryFontSize;
+  final Color secondaryColor;
 
-  PoiTile(this.poi);
+  PoiTile(this.poi, this.primaryFontSize, this.secondaryFontSize, this.secondaryColor);
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +28,16 @@ class PoiTile extends StatelessWidget {
             maxLines: 1,
             style: TextStyle(
                 fontFamily: 'Montserrat',
-                fontSize: 16.0,
+                fontSize: primaryFontSize,
                 color: Colors.white)
           ),
           Text(
               subTitle,
               style: TextStyle(
                   fontFamily: 'Montserrat',
-                  fontSize: 12.0,
+                  fontSize: secondaryFontSize,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white)
+                  color: secondaryColor)
           ),
         ],
       ),

@@ -29,7 +29,7 @@ class CategoryList extends StatelessWidget {
             height: 200.0,
             child: Stack(
               children: <Widget>[
-                ListImageContainer(category.imageUrl),
+                ListImageContainer(category.imageUrl, 200.0),
                 _tileFooter(category)
               ],
             ),
