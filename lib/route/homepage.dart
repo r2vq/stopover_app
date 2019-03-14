@@ -1,3 +1,4 @@
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:stopover_app/route/category_list_page.dart';
 import 'package:stopover_app/route/favourites_page.dart';
@@ -17,10 +18,10 @@ class _HomepageState extends State<Homepage> {
     FlightPage(),
   ];
 
-  final List<Widget> _titles = [
-    Text("My List"),
-    Text("Deals"),
-    Text("My Flight"),
+  final List<TabData> _tabs = [
+    TabData(iconData: Icons.star, title: "My List"),
+    TabData(iconData: Icons.attach_money, title: "Deals"),
+    TabData(iconData: Icons.flight_takeoff, title: "My Flight"),
   ];
 
   @override
@@ -30,24 +31,13 @@ class _HomepageState extends State<Homepage> {
       body: Center(
         child: _children[_selectedIndex],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            title: _titles[0],
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.attach_money),
-            title: _titles[1],
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.flight_takeoff),
-            title: _titles[2],
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        fixedColor: Colors.red,
+      bottomNavigationBar: FancyBottomNavigation(
+        tabs: _tabs,
+        onTabChangedListener: _onItemTapped,
+        initialSelection: 1,
+        activeIconColor: Colors.white,
+        inactiveIconColor: Colors.red,
+        textColor: Colors.red,
       ),
     );
   }

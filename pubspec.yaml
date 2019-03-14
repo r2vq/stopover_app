@@ -26,6 +26,7 @@ dependencies:
   rxdart: ^0.21.0
   shared_preferences: ^0.4.2
   google_maps_flutter: ^0.4.0
+  fancy_bottom_navigation: ^0.3.2
 
 dev_dependencies:
   test: ^1.5.3
