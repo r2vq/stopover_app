@@ -10,7 +10,9 @@ class PoiList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return GridView.builder(
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       itemBuilder: (context, index) {
         return _createCard(context, _pois[index]);
       },
@@ -22,19 +24,22 @@ class PoiList extends StatelessWidget {
     return GestureDetector(
       onTap: () => openPoiDetailPage(context, poi),
       child: Semantics(
-        child: Card(
-          child: Stack(
-            children: <Widget>[
-              ListImageContainer(poi.imageUrl),
-              Text(
-                poi.name,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 40.0,
-                  fontWeight: FontWeight.bold,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(18.0),
+          child: Card(
+            child: Stack(
+              children: <Widget>[
+                ListImageContainer(poi.imageUrl),
+                Text(
+                  poi.name,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
