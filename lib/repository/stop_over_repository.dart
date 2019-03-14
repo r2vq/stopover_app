@@ -49,12 +49,6 @@ class StopOverRepository {
     (await _prefs)
         .setStringList(SHARED_PREFERENCE_KEY_FAVOURITE_POIS, favourites);
   }
-
-  Future<bool> isFavourite(String poiId) async {
-    return (await _prefs)
-        .getStringList(SHARED_PREFERENCE_KEY_FAVOURITE_POIS)
-        .contains(poiId);
-  }
 }
 
 StopOverRepository _repository;
