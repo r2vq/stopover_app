@@ -9,9 +9,9 @@ class StopOverRepository {
       "shared_preference_key_favourite_pois";
 
   final StopOverApi _api;
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _prefs;
 
-  StopOverRepository(this._api);
+  StopOverRepository(this._api, this._prefs);
 
   Future<List<Category>> fetchCategories() async {
     return _api.getCategories();
@@ -55,7 +55,7 @@ StopOverRepository _repository;
 
 StopOverRepository get repository {
   if (_repository == null) {
-    _repository = StopOverRepository(stopOverApi);
+    _repository = StopOverRepository(stopOverApi, SharedPreferences.getInstance());
   }
   return _repository;
 }

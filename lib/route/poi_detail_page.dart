@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stopover_app/bloc/poi_bloc.dart';
 import 'package:stopover_app/model/poi.dart';
+import 'package:stopover_app/styles.dart';
 import 'package:stopover_app/widget/location_map.dart';
 
 class PoiDetailPage extends StatelessWidget {
@@ -13,7 +14,10 @@ class PoiDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("Location Detail Page"),
+          title: Text(
+            _poi.name.toUpperCase(),
+            style: Styles.navBarTitle,
+          ),
         ),
         body: StreamBuilder<List<String>>(
           stream: poiBloc.favouriteIds,

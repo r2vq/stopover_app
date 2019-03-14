@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stopover_app/model/poi.dart';
 import 'package:stopover_app/route/poi_detail_page.dart';
+import 'package:stopover_app/styles.dart';
 import 'package:stopover_app/widget/list_image_container.dart';
+import 'package:stopover_app/widget/poi_tile.dart';
 
 class PoiList extends StatelessWidget {
   final List<Poi> _pois;
@@ -12,7 +14,7 @@ class PoiList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (context, index) {
         return _createCard(context, _pois[index]);
       },
@@ -30,19 +32,28 @@ class PoiList extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 ListImageContainer(poi.imageUrl),
-                Text(
-                  poi.name,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                _tileFooter(poi),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _tileFooter(Poi poi) {
+    final info = PoiTile(poi);
+    final overlay = Container(
+      height: 60.0,
+      padding: EdgeInsets.symmetric(
+          vertical: 5.0, horizontal: Styles.horizontalPaddingDefault),
+      decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
+      child: info,
+    );
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[overlay],
     );
   }
 
