@@ -1,5 +1,6 @@
 class Poi {
   final String _name;
+  final String _discount;
   final String _imageUrl;
   final String _description;
   final String _mapUrl;
@@ -11,9 +12,9 @@ class Poi {
   final String _markerLongPosition;
 
 
-  Poi(this._name, this._imageUrl, this._description, this._mapUrl, this._id,
-      this._endTime, this._startTime, this._categoryId, this._markerLatPosition,
-      this._markerLongPosition);
+  Poi(this._name, this._discount, this._imageUrl, this._description,
+      this._mapUrl, this._id, this._endTime, this._startTime, this._categoryId,
+      this._markerLatPosition, this._markerLongPosition);
 
   String get endTime => _endTime;
 
@@ -23,6 +24,7 @@ class Poi {
 
   factory Poi.fromJson(Map<String, dynamic> json) => Poi(
         json["name"],
+        json["discount"],
         json["image_url"],
         json["description"],
         json["map_url"],
@@ -47,4 +49,6 @@ class Poi {
   String get imageUrl => _imageUrl;
 
   String get name => _name;
+
+  String get discount => _discount;
 }
