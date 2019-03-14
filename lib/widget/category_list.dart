@@ -44,8 +44,12 @@ class CategoryList extends StatelessWidget {
     final overlay = Container(
       height: 80.0,
       padding: EdgeInsets.symmetric(
-          vertical: 5.0, horizontal: Styles.horizontalPaddingDefault),
-      decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
+        vertical: 5.0,
+        horizontal: Styles.horizontalPaddingDefault,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.5),
+      ),
       child: info,
     );
     return Column(
