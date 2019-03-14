@@ -9,6 +9,9 @@
 .history
 .svn/
 
+android/app/src/main/res/values/secrets.xml
+ios/Runner/Secrets.swift
+
 # IntelliJ related
 *.iml
 *.ipr
