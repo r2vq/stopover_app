@@ -13,7 +13,7 @@ class CategoryListPage extends StatelessWidget {
           return Center(
             child: category.hasData
                 ? CategoryList(category.data)
-                : Text("no data"),
+                : CircularProgressIndicator(),
           );
         });
   }

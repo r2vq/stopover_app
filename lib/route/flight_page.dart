@@ -11,7 +11,7 @@ class FlightPage extends StatelessWidget {
         builder: (context, snapshot) {
           return snapshot.hasData
               ? _createFlightUi(snapshot.data)
-              : Text("none");
+              : CircularProgressIndicator();
         });
   }
 

@@ -15,7 +15,7 @@ class CategoryDetailPage extends Scaffold {
             builder: (context, snapshot) => Center(
                   child: snapshot.hasData
                       ? PoiList(snapshot.data)
-                      : Text("no data"),
+                      : CircularProgressIndicator(),
                 ),
           ),
         ) {
