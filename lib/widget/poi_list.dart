@@ -24,7 +24,7 @@ class PoiList extends StatelessWidget {
 
   Widget _createCard(BuildContext context, Poi poi) {
     return GestureDetector(
-      onTap: () => openPoiDetailPage(context, poi),
+      onTap: () => _openPoiDetailPage(context, poi),
       child: Semantics(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(18.0),
@@ -57,7 +57,7 @@ class PoiList extends StatelessWidget {
     );
   }
 
-  openPoiDetailPage(BuildContext context, Poi poi) {
+  _openPoiDetailPage(BuildContext context, Poi poi) {
     Navigator.push(
       context,
       MaterialPageRoute(
