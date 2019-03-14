@@ -47,7 +47,7 @@ class StopOverApiImpl implements StopOverApi {
   @override
   Future<List<Poi>> getPoisByIds(List<String> poiIds) async {
     final response = await http.get(
-        "https://us-central1-stopover-app-api.cloudfunctions.net/poisByIds?poiIds=${poiIds.join(",")}");
+        "https://us-central1-stopover-app-api.cloudfunctions.net/poisByIds?ids=${poiIds.join(",")}");
 
     if (response.statusCode != 200) {
       throw response.body;
