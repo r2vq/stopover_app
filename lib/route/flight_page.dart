@@ -16,19 +16,25 @@ class FlightPage extends StatelessWidget {
   }
 
   Widget _createFlightUi(Flight flight) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(6),
-      child: Card(
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              _createFlightHeader(flight),
-              _createFlightImage(flight),
-              _createFlightInfo(flight),
-              _createQRCodeUI()
-            ],
-          ),
+    return Semantics(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.all(6),
+        child: Column(
+          children: <Widget>[
+            Card(
+              child: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    _createFlightHeader(flight),
+                    _createFlightImage(flight),
+                    _createFlightInfo(flight),
+                    _createQRCodeUI()
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -53,6 +59,7 @@ class FlightPage extends StatelessWidget {
       flight.flightImage,
       fit: BoxFit.fill,
       height: 200.0,
+      semanticLabel: "flight image",
     );
   }
 
@@ -101,23 +108,26 @@ class FlightPage extends StatelessWidget {
   }
 
   Widget _createFlightTime(Flight flight) {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            _createMediumText("Departure"),
-            _createMediumText("Arrival")
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            _createLargeText(flight.departureTime, textColor: Colors.red),
-            _createLargeText(flight.arrivalTime, textColor: Colors.red)
-          ],
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              _createMediumText("Departure"),
+              _createMediumText("Arrival")
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              _createLargeText(flight.departureTime, textColor: Colors.red),
+              _createLargeText(flight.arrivalTime, textColor: Colors.red)
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -140,14 +150,22 @@ class FlightPage extends StatelessWidget {
   Widget _createLargeText(String text, {Color textColor = Colors.black}) {
     return Text(
       text,
-      style: TextStyle(fontSize: 25, color: textColor),
+      style: TextStyle(
+        fontSize: 25,
+        color: textColor,
+        fontFamily: 'Montserrat',
+      ),
     );
   }
 
   Widget _createMediumText(String text, {Color textColor = Colors.black}) {
     return Text(
       text,
-      style: TextStyle(fontSize: 15, color: textColor),
+      style: TextStyle(
+        fontSize: 15,
+        color: textColor,
+        fontFamily: 'Montserrat',
+      ),
     );
   }
 
@@ -157,6 +175,7 @@ class FlightPage extends StatelessWidget {
       child: Image.asset(
         'assets/images/qr-code.png',
         fit: BoxFit.fitHeight,
+        semanticLabel: "qr code",
       ),
     );
   }
