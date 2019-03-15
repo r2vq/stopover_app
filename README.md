@@ -14,6 +14,5 @@ This project is a simple project for the TribalScale Hackathon.
 # Contributing
 
 1. Obtain a Google Maps API Key from the Developer Console.
-2. Create a `secrets.xml` file that shares your API Key with the name `map_key`.
-3. Create a `Secrets.swift` file that has a struct named `Secrets` that shares your API Key as a static String with the name `mapKey`.
-4. Run `flutter packages get`
+2. Create a `Secrets.swift` file that has a struct named `Secrets` that shares your API Key as a static String with the name `mapKey`.
+3. Run `flutter packages get`
