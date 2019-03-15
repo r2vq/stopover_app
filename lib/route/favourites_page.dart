@@ -23,21 +23,25 @@ class FavouritesPage extends StatelessWidget {
 
   Widget _getSnapList(BuildContext context, List<Poi> poiList) {
     final Size cardSize = Size(300.0, 600.0);
-    return SnapList(
-      padding: EdgeInsets.only(
-          left: (MediaQuery.of(context).size.width - cardSize.width) / 2),
-      sizeProvider: (index, data) => cardSize,
-      separatorProvider: (index, data) => Size(10.0, 10.0),
-      builder: (context, index, data) {
-        return GestureDetector(
-          onTap: () => _openPoiDetailPage(context, poiList[index]),
-          child: ClipRRect(
-            borderRadius: new BorderRadius.circular(16.0),
-            child: _getCard(poiList[index]),
-          ),
-        );
-      },
-      count: poiList.length,
+    return Semantics(
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 40.0),
+        child: SnapList(
+          padding: EdgeInsets.symmetric(horizontal: (MediaQuery.of(context).size.width - cardSize.width) / 2),
+          sizeProvider: (index, data) => cardSize,
+          separatorProvider: (index, data) => Size(10.0, 10.0),
+          builder: (context, index, data) {
+            return GestureDetector(
+              onTap: () => _openPoiDetailPage(context, poiList[index]),
+              child: ClipRRect(
+                borderRadius: new BorderRadius.circular(16.0),
+                child: _getCard(poiList[index]),
+              ),
+            );
+          },
+          count: poiList.length,
+        ),
+      ),
     );
   }
 
