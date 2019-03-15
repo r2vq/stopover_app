@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stopover_app/bloc/flight_bloc.dart';
 import 'package:stopover_app/model/flight.dart';
-import 'package:stopover_app/styles.dart';
 
 class FlightPage extends StatelessWidget {
   @override
@@ -150,14 +149,22 @@ class FlightPage extends StatelessWidget {
   Widget _createLargeText(String text, {Color textColor = Colors.black}) {
     return Text(
       text,
-      style: TextStyle(fontSize: 25, color: textColor, fontFamily: 'Montserrat'),
+      style: TextStyle(
+        fontSize: 25,
+        color: textColor,
+        fontFamily: 'Montserrat',
+      ),
     );
   }
 
   Widget _createMediumText(String text, {Color textColor = Colors.black}) {
     return Text(
       text,
-      style: TextStyle(fontSize: 15, color: textColor, fontFamily: 'Montserrat'),
+      style: TextStyle(
+        fontSize: 15,
+        color: textColor,
+        fontFamily: 'Montserrat',
+      ),
     );
   }
 
