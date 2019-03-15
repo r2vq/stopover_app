@@ -59,6 +59,7 @@ class FlightPage extends StatelessWidget {
       flight.flightImage,
       fit: BoxFit.fill,
       height: 200.0,
+      semanticLabel: "flight image",
     );
   }
 
@@ -174,6 +175,7 @@ class FlightPage extends StatelessWidget {
       child: Image.asset(
         'assets/images/qr-code.png',
         fit: BoxFit.fitHeight,
+        semanticLabel: "qr code",
       ),
     );
   }
