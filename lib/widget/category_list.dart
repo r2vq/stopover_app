@@ -40,8 +40,8 @@ class CategoryList extends StatelessWidget {
   }
 
   Widget _tileFooter(Category category) {
-    final info = CategoryTile(category);
-    final overlay = Container(
+    final CategoryTile info = CategoryTile(category);
+    final Container overlay = Container(
       height: 80.0,
       padding: EdgeInsets.symmetric(
         vertical: 5.0,
@@ -59,10 +59,10 @@ class CategoryList extends StatelessWidget {
     );
   }
 
-  _openCategoryDetailPage(BuildContext context, Category category) {
+  void _openCategoryDetailPage(BuildContext context, Category category) {
     Navigator.push(
       context,
-      MaterialPageRoute(
+      MaterialPageRoute<CategoryDetailPage>(
         builder: (context) => CategoryDetailPage(category),
       ),
     );

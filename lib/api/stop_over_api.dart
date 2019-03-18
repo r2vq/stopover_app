@@ -18,35 +18,35 @@ abstract class StopOverApi {
 class StopOverApiImpl implements StopOverApi {
   @override
   Future<List<Category>> getCategories() async {
-    final response = await http.get(
-        "https://us-central1-stopover-app-api.cloudfunctions.net/categories");
-
-    if (response.statusCode != 200) {
-      throw (response.body);
-    }
-
-    return (json.decode(response.body) as List)
-        .map((model) => Category.fromJson(model))
-        .toList();
-  }
-
-  @override
-  Future<List<Poi>> getPois(String categoryId) async {
-    final response = await http.get(
-        "https://us-central1-stopover-app-api.cloudfunctions.net/poisByCategoryId?categoryId=$categoryId");
+    final http.Response response = await http.get(
+        'https://us-central1-stopover-app-api.cloudfunctions.net/categories');
 
     if (response.statusCode != 200) {
       throw response.body;
     }
 
     return (json.decode(response.body) as List)
-        .map((model) => Poi.fromJson(model))
+        .map((dynamic model) => Category.fromJson(model))
+        .toList();
+  }
+
+  @override
+  Future<List<Poi>> getPois(String categoryId) async {
+    final http.Response response = await http.get(
+        'https://us-central1-stopover-app-api.cloudfunctions.net/poisByCategoryId?categoryId=$categoryId');
+
+    if (response.statusCode != 200) {
+      throw response.body;
+    }
+
+    return (json.decode(response.body) as List)
+        .map((dynamic model) => Poi.fromJson(model))
         .toList();
   }
 
   @override
   Future<List<Poi>> getPoisByIds(List<String> poiIds) async {
-    final response = await http.get(
+    final http.Response response = await http.get(
         "https://us-central1-stopover-app-api.cloudfunctions.net/poisByIds?ids=${poiIds.join(",")}");
 
     if (response.statusCode != 200) {
@@ -54,14 +54,14 @@ class StopOverApiImpl implements StopOverApi {
     }
 
     return (json.decode(response.body) as List)
-        .map((model) => Poi.fromJson(model))
+        .map((dynamic model) => Poi.fromJson(model))
         .toList();
   }
 
   @override
   Future<Flight> getFlightInfo() async {
-    final response = await http
-        .get("https://us-central1-stopover-app-api.cloudfunctions.net/flight");
+    final http.Response response = await http
+        .get('https://us-central1-stopover-app-api.cloudfunctions.net/flight');
 
     if (response.statusCode != 200) {
       throw (response.body);

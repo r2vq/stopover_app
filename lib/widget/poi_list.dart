@@ -57,7 +57,7 @@ class PoiList extends StatelessWidget {
     );
   }
 
-  _openPoiDetailPage(BuildContext context, Poi poi) {
+  void _openPoiDetailPage(BuildContext context, Poi poi) {
     Navigator.push(
       context,
       MaterialPageRoute(

@@ -3,10 +3,10 @@ import 'package:stopover_app/model/poi.dart';
 import 'package:stopover_app/repository/stop_over_repository.dart';
 
 class PoiBloc {
-  final _repository = repository;
-  final _allPoiFetcher = PublishSubject<List<Poi>>();
-  final _favouriteIdsFetcher = PublishSubject<List<String>>();
-  final _favouritePoisFetcher = PublishSubject<List<Poi>>();
+  final StopOverRepository _repository = repository;
+  final PublishSubject<List<Poi>> _allPoiFetcher = PublishSubject<List<Poi>>();
+  final PublishSubject<List<String>> _favouriteIdsFetcher = PublishSubject<List<String>>();
+  final PublishSubject<List<Poi>> _favouritePoisFetcher = PublishSubject<List<Poi>>();
 
   Observable<List<Poi>> get allPois => _allPoiFetcher.stream;
 
@@ -14,30 +14,30 @@ class PoiBloc {
 
   Observable<List<Poi>> get favouritePois => _favouritePoisFetcher.stream;
 
-  fetchAllPois(String categoryId) async {
-    List<Poi> pois = await _repository.fetchPois(categoryId);
+  void fetchAllPois(String categoryId) async {
+    final List<Poi> pois = await _repository.fetchPois(categoryId);
     _allPoiFetcher.sink.add(pois);
   }
 
-  fetchFavouritePois() async {
-    List<Poi> pois = await _repository.favouritePOIs();
+  void fetchFavouritePois() async {
+    final List<Poi> pois = await _repository.favouritePOIs();
     _favouritePoisFetcher.sink.add(pois);
   }
 
-  fetchFavouriteIds() async {
-    List<String> ids = await _repository.favouriteIds();
+  void fetchFavouriteIds() async {
+    final List<String> ids = await _repository.favouriteIds();
     _favouriteIdsFetcher.sink.add(ids);
   }
   
-  putFavourite(String poiId, bool isFavourite) async {
+  void putFavourite(String poiId, bool isFavourite) async {
     _repository.putFavouritePoi(poiId, isFavourite);
   }
 
-  dispose() {
+  void dispose() {
     _allPoiFetcher.close();
     _favouriteIdsFetcher.close();
     _favouritePoisFetcher.close();
   }
 }
 
-final poiBloc = PoiBloc();
+final PoiBloc poiBloc = PoiBloc();

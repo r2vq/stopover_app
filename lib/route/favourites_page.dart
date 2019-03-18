@@ -34,7 +34,7 @@ class FavouritesPage extends StatelessWidget {
             return GestureDetector(
               onTap: () => _openPoiDetailPage(context, poiList[index]),
               child: ClipRRect(
-                borderRadius: new BorderRadius.circular(16.0),
+                borderRadius: BorderRadius.circular(16.0),
                 child: _getCard(poiList[index]),
               ),
             );
@@ -57,8 +57,8 @@ class FavouritesPage extends StatelessWidget {
   }
 
   Widget _tileFooter(Poi poi) {
-    final info = PoiTile(poi, 24.0, 16.0, Colors.red);
-    final overlay = Container(
+    final PoiTile info = PoiTile(poi, 24.0, 16.0, Colors.red);
+    final Container overlay = Container(
       height: 80.0,
       padding: EdgeInsets.symmetric(
         vertical: 5.0,
@@ -76,11 +76,11 @@ class FavouritesPage extends StatelessWidget {
     );
   }
 
-  _openPoiDetailPage(BuildContext context, Poi poi) {
+  void _openPoiDetailPage(BuildContext context, Poi poi) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => PoiDetailPage(poi),
+      MaterialPageRoute<PoiDetailPage>(
+        builder: (BuildContext context) => PoiDetailPage(poi),
       ),
     );
   }

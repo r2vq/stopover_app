@@ -8,14 +8,14 @@ class FlightBloc {
 
   Observable<Flight> get flightInfo => _fetcher.stream;
 
-  fetchFlightInfo() async {
-    Flight flightInfo = await _repository.fetchFlightInfo();
+  void fetchFlightInfo() async {
+    final Flight flightInfo = await _repository.fetchFlightInfo();
     _fetcher.sink.add(flightInfo);
   }
 
-  dispose() {
+  void dispose() {
     _fetcher.close();
   }
 }
 
-final flightBloc = FlightBloc();
+final FlightBloc flightBloc = FlightBloc();
