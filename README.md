@@ -4,6 +4,10 @@
 
 This project is a simple project for the TribalScale Hackathon.
 
+## Setup
+
+1. Run the `linter/install.sh` from the project root directory. This will setup a git pre-commit hook to lint all files upon commit. Note that this will *overwrite* your current pre-commit hook, if one exists.
+
 ## Getting Started
 
 1. Run the app from your Android or iOS phone.
