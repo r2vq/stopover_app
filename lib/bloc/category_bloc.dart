@@ -8,14 +8,14 @@ class CategoryBloc {
 
   Observable<List<Category>> get allCategories => _fetcher.stream;
 
-  fetchAllCategories() async {
-    List<Category> categories = await _repository.fetchCategories();
+  void fetchAllCategories() async {
+    final List<Category> categories = await _repository.fetchCategories();
     _fetcher.sink.add(categories);
   }
 
-  dispose() {
+  void dispose() {
     _fetcher.close();
   }
 }
 
-final categoryBloc = CategoryBloc();
+final CategoryBloc categoryBloc = CategoryBloc();

@@ -9,7 +9,7 @@ void main() {
         '[{"name":"shops","image_url":"https://loremflickr.com/cache/resized/4862_44514950700_e544949c39_320_240_nofilter.jpg","id":"20002"}]';
 
     List<Category> categoryList = (json.decode(JSON_STRING) as List)
-        .map((model) => Category.fromJson(model))
+        .map((dynamic model) => Category.fromJson(model))
         .toList();
 
     expect(1, categoryList.length);
