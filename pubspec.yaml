@@ -28,6 +28,8 @@ dependencies:
   google_maps_flutter: ^0.4.0
   fancy_bottom_navigation: ^0.3.2
   snaplist: ^0.1.6
+  sqflite: ^1.0.0
+  path_provider: ^0.4.1
 
 dev_dependencies:
   test: ^1.5.3
